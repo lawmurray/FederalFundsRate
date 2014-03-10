@@ -13,6 +13,6 @@ function prepare_obs
     nc{'time'} = ncdouble('nr');
     nc{'y'} = ncdouble('nr');
     nc{'time'}(:) = 1.0;
-    nc{'y'}(:) = 2.0;
+    nc{'y'}(:) = 0.15;
     ncclose(nc);
 end

@@ -30,7 +30,7 @@ model LinearDriftBridge {
 
   sub bridge {
     inline bdelta = t_next_obs - t_now;
-    inline bmu = theta1/theta2 + (x - theta1/theta2)*exp(-theta2*(bdelta));
+    inline bmu = theta1/theta2 + (x - theta1/theta2)*exp(-theta2*bdelta);
     inline bsigma = sqrt(theta3**2*(1.0 - exp(-2.0*theta2*bdelta))/(2*theta2));
 
     y ~ gaussian(bmu, bsigma);
