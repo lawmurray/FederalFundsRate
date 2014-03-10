@@ -11,15 +11,15 @@ model LinearDriftBridge {
   const theta1 = 0.0187;
   const theta2 = 0.2610;
   const theta3 = 0.0224;
-  const sigma = sqrt(theta3**2*(1.0 - exp(-2.0*theta2*h)/(2*theta2));
+  const sigma = sqrt(theta3**2*(1.0 - exp(-2.0*theta2*h))/(2*theta2));
 
   noise w;
-  state mu, sigma, x;
+  state mu, x;
   obs y;
 
   sub initial {
-    mu <- 0;
-    x <- 0;
+    mu <- theta1/theta2;
+    x <- theta1/theta2;
   }
 
   sub transition(delta = h) {
@@ -31,7 +31,7 @@ model LinearDriftBridge {
   sub bridge {
     inline bdelta = t_next_obs - t_now;
     inline bmu = theta1/theta2 + (x - theta1/theta2)*exp(-theta2*(bdelta));
-    inline bsigma = sqrt(theta3**2*(1.0 - exp(-2.0*theta2*bdelta)/(2*theta2));
+    inline bsigma = sqrt(theta3**2*(1.0 - exp(-2.0*theta2*bdelta))/(2*theta2));
 
     y ~ gaussian(bmu, bsigma);
   }
