@@ -52,4 +52,5 @@ function plot_metric(metric)
     loglog([mn mx], [mn mx], '--k');
     axis([mn mx mn mx]);
     axis('square');
+    grid minor on;
 end
