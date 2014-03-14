@@ -3,6 +3,11 @@ function plot_metric(metric)
         metric = 1;
     end
     
+    % true likelihoods for MSE calculation
+    nc = netcdf('data/obs.nc', 'r');
+    ll = nc{'loglikelihood'}(:);
+    ncclose(nc);
+    
     P = {};
     y = {};
     filters = {'Bootstrap'; 'Bridge'};
@@ -17,13 +22,11 @@ function plot_metric(metric)
             T = nc{'time'}(:,:)';
         
             if metric == 1
-                tmp = ess(L)'./mean(T)';
+                tmp = -mean((L - ll(i)).^2)'./mean(T)';
             elseif metric == 2
-                tmp = car(L)'./mean(T)';
+                tmp = ess(L)'./mean(T)';
             elseif metric == 3
-                tmp = mean(L)';
-            elseif metric == 4
-                tmp = -std(L)'./mean(T)';
+                tmp = car(L)'./mean(T)';
             end
             y{i} = [ y{i}; tmp ];
             P{i} = [ P{i}; nc{'P'}(:) ];

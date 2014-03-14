@@ -15,4 +15,21 @@ function prepare_obs
     nc{'time'}(:) = 1.0;
     nc{'y'}(:) = 0.15;
     ncclose(nc);
+    
+    % compute exact likelihoods for all data sets
+    nc = netcdf('data/obs.nc', 'w');
+    y = nc{'y'}(:,:);
+    t = repmat(nc{'time'}(:), 1, columns(y));
+    theta1 = 0.0187;
+    theta2 = 0.2610;
+    theta3 = 0.0224;
+    
+    h = diff(t);
+    mu = theta1./theta2 .+ (y(1:end-1,:) .- theta1./theta2).*exp(-theta2.*h);
+    sigma2 = theta3.^2.*(1.0 .- exp(-2.0.*theta2.*h))./(2.0.*theta2);
+    ll = sum(log(normpdf(y(2:end,:), mu, sqrt(sigma2))));
+    
+    nc{'loglikelihood'} = ncdouble('np');
+    nc{'loglikelihood'}(:) = ll;
+    ncclose(nc);
 end

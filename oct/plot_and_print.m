@@ -16,17 +16,17 @@ function plot_and_print ()
     set (figure(1), 'paperposition', [0 0 sz]);
 
     subplot(1,3,1);
-    plot_metric(4);
-    title('-\sigma/t');
+    plot_metric(1);
+    title('-MSE(log z)/Mean(t)');
     xlabel('Bootstrap');
     ylabel('Bridge');
     subplot(1,3,2);
-    plot_metric(1);
-    title('ESS/t');
+    plot_metric(2);
+    title('ESS(z)/Mean(t)');
     xlabel('Bootstrap');
     subplot(1,3,3);
-    plot_metric(2);
-    title('CAR/t');
+    plot_metric(3);
+    title('CAR(z)/Mean(t)');
     xlabel('Bootstrap');
     file = sprintf('%s/metrics.pdf', FIG_DIR);
     saveas(figure(1), file);
