@@ -3,6 +3,7 @@ function plot_filter
   ps = [];
   filters = {'Bootstrap'; 'Bridge'};
 
+  r = {};
   for i = 1:length(filters);
       file = sprintf('results/filter_%s.nc', tolower(filters{i}));
       subplot(1, length(filters), i);
@@ -15,11 +16,9 @@ function plot_filter
       for j = 1:columns(A)
           if sum(A(:,j) != [0:(rows(A)-1)]') > 0
               % resampling occurred at this point
-              patch([t(to) t(to + 1) t(to + 1) t(to)], [ax(3) ax(3) ax(4) ...
-                                  ax(4)], 'facecolor', [0.9 0.9 0.9], ...
-                    'facealpha', 0.5);
-              hold on;
+              r{length(r) + 1} = [t(to) t(to + 1)];
               bi_plot_paths(file, 'x', [], ps, [from:to], i);
+              hold on;
               from = j;
           end
           to = j;
@@ -27,6 +26,12 @@ function plot_filter
       bi_plot_paths(file, 'x', [], ps, [from:to], i);
       hold on;
       ncclose(nc);
+ 
+      % resampling lines
+      for j = 1:length(r)
+          patch([r{j}(1) r{j}(2) r{j}(2) r{j}(1)], [ax(3) ax(3) ax(4) ax(4)], 'edgecolor', 'k', 'linewidth', 4, 'facecolor', 'k');
+          hold on;
+      end
       
       bi_plot_paths('data/obs_set.nc', 'y');
       hold off;
