@@ -22,7 +22,7 @@ function plot_metric(metric)
             T = nc{'time'}(:,:)';
         
             if metric == 1
-                tmp = -mean((L - ll(i)).^2)'./mean(T)';
+                tmp = 1.0./mean((L - ll(i)).^2)'./mean(T)';
             elseif metric == 2
                 tmp = ess(L)'./mean(T)';
             elseif metric == 3
