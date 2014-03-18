@@ -16,7 +16,7 @@ function plot_filter
           if sum(A(:,j) != [0:(rows(A)-1)]') > 0
               % resampling occurred at this point
               line([t(j-1) t(j-1)], [ax(3) ax(4)], 'color',[0.7 0.7 0.7], ...
-                   'linewidth', 3);
+                   'linewidth', 10);
           end
       end
 
