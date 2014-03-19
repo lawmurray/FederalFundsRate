@@ -1,4 +1,4 @@
-function plot_metric(metric)
+function h = plot_metric(metric)
     if nargin < 1
         metric = 1;
     end
@@ -22,7 +22,7 @@ function plot_metric(metric)
             T = nc{'time'}(:,:)';
         
             if metric == 1
-                tmp = -mean((L - ll(i)).^2)'./mean(T)';
+                tmp = 1.0./mean((L - ll(i)).^2)'./mean(T)';
             elseif metric == 2
                 tmp = ess(L)'./mean(T)';
             elseif metric == 3
@@ -43,8 +43,8 @@ function plot_metric(metric)
         else
             col = watercolour(2);
         end
-        h = loglog(y{1}(i), y{2}(i), 'o', 'color', col, 'markersize', ...
-                   sqrt(P{1}(i)/pi), 'linewidth', 3);
+        loglog(y{1}(i), y{2}(i), '.', 'color', col, 'markersize', ...
+                   2*sqrt(P{1}(i)/pi), 'linewidth', 3);
         hold on;
     end
 
@@ -55,5 +55,6 @@ function plot_metric(metric)
     loglog([mn mx], [mn mx], '--k');
     axis([mn mx mn mx]);
     axis('square');
-    grid minor on;
+    grid on;
+    grid minor off;
 end
