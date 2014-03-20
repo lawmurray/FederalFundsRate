@@ -1,51 +1,48 @@
-function h = plot_metric(metric)
+function plot_metric(metric)
+    pkg load netcdf;
     if nargin < 1
         metric = 1;
     end
     
     % true likelihoods for MSE calculation
-    nc = netcdf('data/obs.nc', 'r');
-    ll = nc{'loglikelihood'}(:);
-    ncclose(nc);
+    ll = ncread('data/obs.nc', 'loglikelihood');
     
-    P = {};
     y = {};
     filters = {'Bootstrap'; 'Bridge'};
     for i = 1:length(filters)
         y{i} = [];
-        P{i} = [];
         rep = 0;
         file = sprintf('results/test_%s-%d.nc', tolower(filters{i}), rep);
         while exist(file, 'file')
-            nc = netcdf(file, 'r');
-            L = nc{'loglikelihood'}(:,:)';
-            T = nc{'time'}(:,:)';
+            L = ncread(file, 'loglikelihood');
+            T = ncread(file, 'time');
+            P = ncread(file, 'P');
         
             if metric == 1
-                tmp = 1.0./mean((L - ll(i)).^2)'./mean(T)';
+                tmp = 1.0./mean((L - ll(rep + 1)).^2)./mean(T);
             elseif metric == 2
-                tmp = ess(L)'./mean(T)';
+                tmp = ess(L)./mean(T);
             elseif metric == 3
-                tmp = car(L)'./mean(T)';
+                tmp = car(L)./mean(T);
             end
             y{i} = [ y{i}; tmp ];
-            P{i} = [ P{i}; nc{'P'}(:) ];
-            ncclose(nc);
             
             rep = rep + 1;
             file = sprintf('results/test_%s-%d.nc', tolower(filters{i}), rep);
         end
     end
 
-    for i=1:rows(y{1})
-        if y{1}(i) > y{2}(i)
-            col = watercolour(1);
-        else
-            col = watercolour(2);
+    for i = 1:rows(y{1})
+        for j = 1:columns(y{1})
+            if y{1}(i,j) > y{2}(i,j)
+                col = watercolour(1);
+            else
+                col = watercolour(2);
+            end
+            h = loglog(y{1}(i,j), y{2}(i,j), '.', 'color', col, ...
+                'markersize', sqrt(3*P(j)/pi));
+            hold on;
         end
-        loglog(y{1}(i), y{2}(i), '.', 'color', col, 'markersize', ...
-                   2*sqrt(P{1}(i)/pi), 'linewidth', 3);
-        hold on;
     end
 
     %axis('tight');
