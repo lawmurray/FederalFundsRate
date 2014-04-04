@@ -29,8 +29,8 @@ model OrnsteinUhlenbeckBridge {
   }
 
   sub initial {
-    mu <- theta1/theta2;
-    x <- theta1/theta2;
+    mu <- 0.008; // first observation for FFR data, not in observation file
+    x <- 0.008;
   }
 
   sub transition(delta = h) {
