@@ -1,5 +1,4 @@
 function plot_metric(metric)
-    pkg load netcdf;
     if nargin < 1
         metric = 1;
     end

@@ -7,7 +7,7 @@
  * added. This is then used in the observation block to weight appropriately.
  */
 model LinearDriftBridge {
-  const h = 0.01;
+  const h = 0.2;
 
   param theta1, theta2, theta3;
   noise w;
@@ -23,9 +23,9 @@ model LinearDriftBridge {
   }
 
   sub proposal_parameter {
-    theta1 ~ truncated_gaussian(theta1, 1.0e-4, 0.0, 1.0);
-    theta2 ~ truncated_gaussian(theta2, 1.0e-4, 0.0, 1.0);
-    theta3 ~ truncated_gaussian(theta3, 1.0e-3, 0.0, 1.0);
+    theta1 ~ truncated_gaussian(theta1, 4.0e-5, 0.0, 1.0);
+    theta2 ~ truncated_gaussian(theta2, 4.0e-5, 0.0, 1.0);
+    theta3 ~ truncated_gaussian(theta3, 2.0e-5, 0.0, 1.0);
   }
 
   sub initial {
