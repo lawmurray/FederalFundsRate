@@ -1,7 +1,7 @@
 function plot_filter
-  ax = [0 4 0 0.08];
-  ts = [1:21];
-  obs_ts = [1:4];
+  ax = [190 194 0 0.2];
+  ts = [951:971];
+  obs_ts = [190:194];
   filters = {'Bootstrap'; 'Bridge'};
 
   for i = 1:length(filters);
@@ -13,10 +13,10 @@ function plot_filter
       % resampling lines
       t = ncread(file, 'time')(ts);
       A = ncread(file, 'ancestor')(:,ts);
-      for j = 1:columns(A)
+      for j = 2:columns(A)
           if sum(A(:,j) != [0:(rows(A)-1)]') > 0
               % resampling occurred at this point
-              line([t(j-1) t(j-1)], [ax(3) ax(4)], 'color',[0.7 0.7 0.7], ...
+              line([t(j-1) t(j-1)], [ax(3) ax(4)], 'color', [0.7 0.7 0.7], ...
                    'linewidth', 10);
           end
       end

@@ -13,7 +13,7 @@ function plot_and_print ()
     FIG_DIR = 'figs';
     mkdir(FIG_DIR);
 
-    sz = [ 9 4 ];
+    sz = [ 16 4 ];
     set (figure(1), 'papersize', sz);
     set (figure(1), 'paperposition', [0 0 sz]);
 
