@@ -1,17 +1,18 @@
 function plot_filter
-  ax = [0 1 -0.05 0.2];
+  ax = [0 4 0 0.08];
+  ts = [1:21];
+  obs_ts = [1:4];
   filters = {'Bootstrap'; 'Bridge'};
 
   for i = 1:length(filters);
       file = sprintf('results/filter_%s.nc', tolower(filters{i}));
       subplot(1, length(filters), i);
-      bi_plot_paths(file, 'x', [], [], [], i);
+      bi_plot_paths(file, 'x', [], [], ts, i);
       hold on;
       
       % resampling lines
-      nc = netcdf(file, 'r');
-      t = nc{'time'}(:);
-      A = nc{'ancestor'}(:,:)';
+      t = ncread(file, 'time')(ts);
+      A = ncread(file, 'ancestor')(:,ts);
       for j = 1:columns(A)
           if sum(A(:,j) != [0:(rows(A)-1)]') > 0
               % resampling occurred at this point
@@ -21,7 +22,7 @@ function plot_filter
       end
 
       % observations
-      bi_plot_paths('data/obs_set.nc', 'y');
+      bi_plot_paths('data/obs.nc', 'y', [], [], obs_ts);
       hold off;
       
       axis(ax);

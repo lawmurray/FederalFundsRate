@@ -4,7 +4,7 @@ function plot_metric(metric)
     end
     
     % true likelihoods for MSE calculation
-    ll = ncread('data/obs.nc', 'loglikelihood');
+    ll = ncread('data/init_test_filter.nc', 'loglikelihood');
     
     y = {};
     filters = {'Bootstrap'; 'Bridge'};
@@ -16,7 +16,7 @@ function plot_metric(metric)
             L = ncread(file, 'loglikelihood');
             T = ncread(file, 'time');
             P = ncread(file, 'P');
-        
+            
             if metric == 1
                 tmp = 1.0./mean((L - ll(rep + 1)).^2)./mean(T);
             elseif metric == 2
