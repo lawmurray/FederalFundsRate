@@ -1,9 +1,9 @@
-function plot_filter_set
+function plot_filter
   ax = [0 1 -0.05 0.2];
   filters = {'Bootstrap'; 'Bridge'};
 
   for i = 1:length(filters);
-      file = sprintf('results/filter_set_%s.nc', tolower(filters{i}));
+      file = sprintf('results/filter_%s.nc', tolower(filters{i}));
       subplot(1, length(filters), i);
       bi_plot_paths(file, 'x', [], [], [], i);
       hold on;
