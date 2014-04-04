@@ -8,8 +8,4 @@ function prepare_init()
     nc{'theta2'}(:) = 0.2610;
     nc{'theta3'}(:) = 0.0224;
     ncclose(nc);
-    
-    % same for all data sets
-    copyfile('data/init.nc', 'data/init_set.nc');
-    copyfile('data/init.nc', 'data/init_ffr.nc');
 end

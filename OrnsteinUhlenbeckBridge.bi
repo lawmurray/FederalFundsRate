@@ -1,12 +1,12 @@
 /**
- * Linear drift model.
+ * Ornstein---Uhlenbeck model for U.S. Federal Funds Rate.
  *
  * The model is set up for bridge sampling, where the observation block
  * provides the weighting p(x(n)|x(n-1)). The state variable mu holds the mean
  * of x(n) at each time, without the noise term w(n) having yet been
  * added. This is then used in the observation block to weight appropriately.
  */
-model LinearDriftBridge {
+model OrnsteinUhlenbeckBridge {
   const h = 0.2;
 
   param theta1, theta2, theta3;

@@ -4,4 +4,4 @@
 source $HOME/init.sh
 cd $PBS_O_WORKDIR
 
-./run_bootstrap.sh
+./run.sh
