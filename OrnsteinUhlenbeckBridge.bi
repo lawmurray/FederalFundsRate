@@ -24,13 +24,13 @@ model OrnsteinUhlenbeckBridge {
 
   sub proposal_parameter {
     theta1 ~ truncated_gaussian(theta1, 4.0e-5, 0.0, 1.0);
-    theta2 ~ truncated_gaussian(theta2, 4.0e-5, 0.0, 1.0);
-    theta3 ~ truncated_gaussian(theta3, 2.0e-5, 0.0, 1.0);
+    theta2 ~ truncated_gaussian(theta2, 1.0e-3, 0.0, 1.0);
+    theta3 ~ truncated_gaussian(theta3, 4.0e-5, 0.0, 1.0);
   }
 
   sub initial {
-    mu <- 0.008; // first observation for FFR data, not in observation file
-    x <- 0.008;
+    mu <- 0.0912; // first obs for FFR data, Jan 1989, not in obs file
+    x <- 0.0912;
   }
 
   sub transition(delta = h) {

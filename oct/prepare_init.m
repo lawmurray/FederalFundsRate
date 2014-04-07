@@ -12,9 +12,9 @@ function prepare_init()
         % assume variables already exist...
     end
     
-    ncwrite(init_file, 'theta1', 0.011969);
-    ncwrite(init_file, 'theta2', 0.26028);
-    ncwrite(init_file, 'theta2', 0.016356);
+    ncwrite(init_file, 'theta1', 3.6130e-5);
+    ncwrite(init_file, 'theta2', 0.010261);
+    ncwrite(init_file, 'theta3', 0.0017640);
     
     % compute exact likelihoods for all parameters sampled for test_filter
     theta1 = ncread(init_test_filter_file, 'theta1');
