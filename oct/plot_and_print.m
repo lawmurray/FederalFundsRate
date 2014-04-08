@@ -44,7 +44,8 @@ function plot_and_print ()
     ps = [10000:100000];
     ts = [1:121];
     obs_ts = [1:12];
-    subplot(2,1,1);
+    
+    subplot(3,3,1:6);
     bi_plot_quantiles('results/posterior.nc', 'x', [], ps, ts);
     hold on;
     bi_plot_paths('data/obs.nc', 'y', [], [], obs_ts);
@@ -52,21 +53,24 @@ function plot_and_print ()
     ylabel('x');
     grid on;
     
-    subplot(2,3,4);
+    subplot(3,3,7);
     bi_hist('results/posterior.nc', 'theta1', [], ps);
     xlabel('\theta_1');
     grid on;
     
-    subplot(2,3,5);
+    subplot(3,3,8);
     bi_hist('results/posterior.nc', 'theta2', [], ps);
     xlabel('\theta_2');
     grid on;
 
-    subplot(2,3,6);
+    subplot(3,3,9);
     bi_hist('results/posterior.nc', 'theta3', [], ps);
     xlabel('\theta_3');
     grid on;
 
+    sz = [ 16 6 ];
+    set (figure(1), 'papersize', sz);
+    set (figure(1), 'paperposition', [0 0 sz]); 
     file = sprintf('%s/posterior.pdf', FIG_DIR);
     saveas (figure(1), file);
     system(sprintf('pdfcrop %s %s', file, file));
