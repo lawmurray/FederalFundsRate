@@ -7,7 +7,7 @@
  * added. This is then used in the observation block to weight appropriately.
  */
 model OrnsteinUhlenbeckBridge {
-  const h = 0.2;
+  const h = 0.1;
 
   param theta1, theta2, theta3;
   noise w;

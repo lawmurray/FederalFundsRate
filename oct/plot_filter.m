@@ -1,7 +1,7 @@
 function plot_filter
-  ax = [190 194 0 0.2];
-  ts = [951:971];
-  obs_ts = [190:194];
+  ax = [0 4 0.08 0.12];
+  ts = [1:41];
+  obs_ts = [1:4];
   filters = {'Bootstrap'; 'Bridge'};
 
   for i = 1:length(filters);

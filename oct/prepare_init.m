@@ -23,7 +23,7 @@ function prepare_init()
     
     t = ncread(obs_file, 'time');
     y = ncread(obs_file, 'y');
-    x = [ 0.008; y(1:end-1) ];
+    x = [ 0.0912; y(1:end-1) ];
     h = diff([ 0; t ]);
     
     ll = zeros(length(theta1));
