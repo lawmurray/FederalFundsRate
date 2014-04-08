@@ -39,4 +39,35 @@ function plot_and_print ()
     file = sprintf('%s/filter.pdf', FIG_DIR);
     saveas (figure(1), file);
     system(sprintf('pdfcrop %s %s', file, file));
+    
+    clf;
+    ps = [10000:100000];
+    ts = [1:121];
+    obs_ts = [1:12];
+    subplot(2,1,1);
+    bi_plot_quantiles('results/posterior.nc', 'x', [], ps, ts);
+    hold on;
+    bi_plot_paths('data/obs.nc', 'y', [], [], obs_ts);
+    xlabel('t');
+    ylabel('x');
+    grid on;
+    
+    subplot(2,3,4);
+    bi_hist('results/posterior.nc', 'theta1', [], ps);
+    xlabel('\theta_1');
+    grid on;
+    
+    subplot(2,3,5);
+    bi_hist('results/posterior.nc', 'theta2', [], ps);
+    xlabel('\theta_2');
+    grid on;
+
+    subplot(2,3,6);
+    bi_hist('results/posterior.nc', 'theta3', [], ps);
+    xlabel('\theta_3');
+    grid on;
+
+    file = sprintf('%s/posterior.pdf', FIG_DIR);
+    saveas (figure(1), file);
+    system(sprintf('pdfcrop %s %s', file, file));
 end
