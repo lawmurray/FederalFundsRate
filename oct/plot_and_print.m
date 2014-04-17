@@ -13,7 +13,7 @@ function plot_and_print ()
     FIG_DIR = 'figs';
     mkdir(FIG_DIR);
 
-    sz = [ 16 4 ];
+    sz = [ 12 4 ];
     set (figure(1), 'papersize', sz);
     set (figure(1), 'paperposition', [0 0 sz]);
 
@@ -41,12 +41,11 @@ function plot_and_print ()
     system(sprintf('pdfcrop %s %s', file, file));
     
     clf;
-    ps = [10000:100000];
     ts = [1:121];
     obs_ts = [1:12];
     
     subplot(3,3,1:6);
-    bi_plot_quantiles('results/posterior.nc', 'x', [], ps, ts);
+    bi_plot_quantiles('results/posterior.nc', 'x', [], [], ts);
     hold on;
     bi_plot_paths('data/obs.nc', 'y', [], [], obs_ts);
     xlabel('t');
@@ -54,21 +53,21 @@ function plot_and_print ()
     grid on;
     
     subplot(3,3,7);
-    bi_hist('results/posterior.nc', 'theta1', [], ps);
+    bi_hist('results/posterior.nc', 'theta1', [], [], [], 20, []);
     xlabel('\theta_1');
     grid on;
     
     subplot(3,3,8);
-    bi_hist('results/posterior.nc', 'theta2', [], ps);
+    bi_hist('results/posterior.nc', 'theta2', [], [], [], 20, []);
     xlabel('\theta_2');
     grid on;
 
     subplot(3,3,9);
-    bi_hist('results/posterior.nc', 'theta3', [], ps);
+    bi_hist('results/posterior.nc', 'theta3', [], [], [], 20, []);
     xlabel('\theta_3');
     grid on;
 
-    sz = [ 16 6 ];
+    sz = [ 12 4.5 ];
     set (figure(1), 'papersize', sz);
     set (figure(1), 'paperposition', [0 0 sz]); 
     file = sprintf('%s/posterior.pdf', FIG_DIR);

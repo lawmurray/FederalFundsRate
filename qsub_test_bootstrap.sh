@@ -1,5 +1,5 @@
 #!/bin/sh
-#PBS -l walltime=08:00:00,nodes=1:ppn=1,vmem=8gb -j oe
+#PBS -l walltime=08:00:00,nodes=1:ppn=4,vmem=16gb -j oe
 
 source $HOME/init.sh
 cd $PBS_O_WORKDIR

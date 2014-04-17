@@ -23,8 +23,8 @@ model OrnsteinUhlenbeckBridge {
   }
 
   sub proposal_parameter {
-    theta1 ~ truncated_gaussian(theta1, 4.0e-5, -1.0, 1.0);
-    theta2 ~ truncated_gaussian(theta2, 1.0e-3, 0.0, 1.0);
+    theta1 ~ truncated_gaussian(theta1, 8.0e-5, -1.0, 1.0);
+    theta2 ~ truncated_gaussian(theta2, 2.0e-3, 0.0, 1.0);
     theta3 ~ truncated_gaussian(theta3, 4.0e-5, 0.0, 1.0);
   }
 
