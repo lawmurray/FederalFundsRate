@@ -1,5 +1,5 @@
-LibBi package: LinearDriftBridge
-=========================
+LibBi package: FederalFundsRate
+===============================
 
 Synopsis
 --------
