@@ -1,9 +1,9 @@
-name: LinearDriftBridge
+name: FederalFundsRate
 version: 1.0.0
-author: 
-email: 
-website-url:
-download-url:
-github-url:
-description:
-
+author: Lawrence Murray
+email: lawrence.murray@csiro.au
+website-url: http://www.github.com/lawmurray/FederalFundsRate
+download-url: http://www.github.com/lawmurray/FederalFundsRate/archive/master.tar.gz
+github-url: http://www.github.com/lawmurray/FederalFundsRate
+description: Ornstein--Uhlenbeck model for diffusion bridge sampling and
+parameter estimation with U.S. Federal Funds Rate data.
