@@ -13,7 +13,7 @@ already included.
     ./run.sh
     
 This runs a particle filter as well as samples from the posterior distribution
-of a Federal Funds Rate data set.
+using a Federal Funds Rate data set.
 
     ./test.sh
 
@@ -60,4 +60,4 @@ References
 ----------
 
 Del Moral, P. & Murray, L. M. Sequential Monte Carlo with Highly Informative
-Observations, 2014.
+Observations, 2014. [\[arXiv\]](http://arxiv.org/abs/1405.4081)
